@@ -1,0 +1,91 @@
+
+workflows:
+  version: 2.1
+  build-deploy:
+    jobs:
+      - uiDockerImage
+      - apiDockerImage:
+          requires:
+            - apiBuild
+      - apiBuild
+
+
+version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: microsoft/dotnet:2.1-sdk
+    working_directory: ~/repo
+  myexecutor:
+    docker:
+      - image: circleci/openjdk
+    working_directory: ~/repo
+jobs:
+  apiBuild:
+    executor: my-executor
+    #machine: true
+    steps:
+     # Checkout the code from the branch into the working_directory
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Restore Code
+          command: dotnet restore API/CODE/
+      - run:
+          name: Build Code
+          command: dotnet build API/CODE/
+      - run:
+          name: Publish Code
+          command: dotnet publish --output "/root/repo/API/out/"  API/CODE/
+ 
+      - persist_to_workspace:
+         root: .
+         paths: 
+           - .
+      - store_artifacts:
+          path: /root/repo/API/out/
+          
+          
+  apiDockerImage:
+    executor: myexecutor
+    #machine: true
+    steps:
+      #- checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Show API/out/
+          command: ls API/out/
+      - run:
+          name: Build RoomAccounts-API docker image
+          command:  docker build -t swaleh1513/api.rumaccounts:circleci -f API/dockerfile .
+      - run:
+          name: Docker-Hub Login
+          command: echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+      - run:
+          name: Docker-Hub Image Push
+          command: docker push swaleh1513/api.rumaccounts:circleci
+          
+  uiDockerImage:
+    executor: myexecutor
+    #machine: true
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Show UI/
+          command: ls UI/
+      - run:
+          name: Build RoomAccounts-UI docker image
+          command:  docker build -t swaleh1513/ui.rumaccounts:circleci -f UI/Dockerfile .
+      - run:
+          name: Docker-Hub Login
+          command: echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+      - run:
+          name: Docker-Hub Image Push
+          command: docker push swaleh1513/ui.rumaccounts:circleci

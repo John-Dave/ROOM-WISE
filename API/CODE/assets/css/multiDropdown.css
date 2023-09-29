@@ -1,0 +1,13 @@
+div.multiple_select_checkbox {
+    width: 370px;
+    height: 60px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #CCCCCC;
+}
+
+div.multiple_select_checkbox2{
+     border: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 16px;
+    height: 45px;
+}

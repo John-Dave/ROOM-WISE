@@ -1,0 +1,18 @@
+version: '2'
+services:
+  ui-rumacc:
+    container_name: "rumacc-ui"
+    image: swaleh1513/ui.rumaccounts:v2
+    volumes:
+    - ../API/profilepics:/usr/share/nginx/html/assets/images/profilepics
+    - ./default.conf:/etc/nginx/conf.d/default.conf
+    - ./tls.crt:/etc/ssl/tls.crt
+    - ./tls.key:/etc/ssl/tls.key
+    - ./settings.js:/usr/share/nginx/html/assets/jsFolder/settings.js
+    restart: always
+    expose:
+      - "443"
+    ports:
+      - "80:80"
+      - "443:443"
+

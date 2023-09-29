@@ -1,0 +1,82 @@
+version: '2'
+services:
+  ui-rumacc:
+    container_name: "rumacc-ui"
+    image: swaleh1513/ui.rumaccounts:v2
+    environment:
+      NGINX_SERVER: 192.168.29.200
+      NGINX_PROXY_PASS_URL: http://rumacc-api:5000/api
+    volumes:
+    - ./API/profilepics:/usr/share/nginx/html/assets/images/profilepics
+    - ./UI/default.conf:/etc/nginx/conf.d/default.conf
+    - ./UI/tls.crt:/etc/ssl/tls.crt
+    - ./UI/tls.key:/etc/ssl/tls.key
+    #- ./UI/settings.js:/usr/share/nginx/html/assets/jsFolder/settings.js
+    restart: always
+    expose:
+      - "443"
+    ports:
+      - "80:80"
+      #- "443:443"
+    networks:
+      - rumnet
+  webapi:
+    container_name: "rumacc-api"
+    image: swaleh1513/api.rumaccounts:v2
+    environment:
+      DB_SERVER: rumacc-db
+      DB_USERNAME: root
+      DB_PASSWORD: qwertypass
+      DB_PORT: 3306
+      DB_NAME: webapidb
+      DB_SSL_MODE: none
+      ALLOW_ORIGIN: http://192.168.29.200
+      PROFILE_PIC_PATH: /app/profilepics/
+    volumes:
+    - ./API/profilepics:/app/profilepics
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - rumnet
+  mysql-docker:
+    image: swaleh1513/db.rumaccounts:v2
+    container_name: "rumacc-db"
+    environment:
+      MYSQL_ROOT_PASSWORD: qwertypass
+      MYSQL_DATABASE: webapidb
+    volumes:
+      - ./dumpData/:/docker-entrypoint-initdb.d/
+      #- ./MYSQL/bakup/may:/var/lib/mysql
+      #- ./MYSQL/config:/etc/mysql/conf.d
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - rumnet
+  #fradelg/mysql-cron-backup    
+#  mysql-cron-backup:
+#    image: swaleh1513/mysqlchron.rumaccounts:v1
+#    container_name: "mysqlcron-job"
+#    depends_on:
+#      - mysql-docker
+#    volumes:
+#      - ./mysql-Cron/backup:/backup
+#    environment:
+#      - MYSQL_HOST=rumacc-db
+#      - MYSQL_USER=root
+#      - MYSQL_PASS=qwertypass
+#      - MAX_BACKUPS=60
+#      - INIT_BACKUP=0
+#      - MYSQLDUMP_OPTS=--single-transaction
+#      #- MYSQL_DB=--all-databases
+#      # Every day at 03:00
+#      - CRON_TIME=0 3 * * *
+#    restart: unless-stopped
+#    networks:
+#      - rumnet
+networks:
+  rumnet:
+    driver: bridge
+    
+#https://github.com/fradelg/docker-mysql-cron-backup

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="MySql.Data" Version="8.0.12" />
+  </ItemGroup>
+
+
+<ItemGroup>
+  <Reference Include="Newtonsoft.Json">
+    <HintPath>Newtonsoft.Json.dll</HintPath>
+    <SpecificVersion>False</SpecificVersion> 
+    <!-- You may set it to true if your dll has a specific version -->
+  </Reference>
+</ItemGroup>
+
+</Project>
+

@@ -1,0 +1,236 @@
+﻿ .box {
+            width: 20%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 35px;
+            border: 2px solid #fff;
+            border-radius: 20px/50px;
+            background-clip: padding-box;
+            text-align: center;
+          }
+          .button {
+            font-size: 1em;
+            padding: 10px;
+            color: #fff;
+            border: 2px solid orange;
+            border-radius: 20px/50px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+          }
+          .button:hover {
+            background: orange;
+          }
+          .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: visible;
+            opacity: 1;
+          }
+          .overlay:target {
+            visibility: hidden;
+            opacity: 0;
+            display:none
+          }
+          .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+          }
+          .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+          }
+          .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            transition: all 200ms;
+            font-size: 70px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000;
+          }
+          .popup .close:hover {
+            color: orange;
+          }
+          .popup .content {
+            max-height: 30%;
+            overflow: auto;
+          }
+          .close {
+            position: absolute;
+            top: 3px;
+            right: 10px;
+            transition: all 200ms;
+            font-size: 70px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000;
+          }
+
+
+          /*On Off Switch Rounded sliders */
+          .switch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 30px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(44px);
+  -ms-transform: translateX(44px);
+  transform: translateX(44px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.DashboardDiv1 {
+  background:yellow;
+  height:120px;
+  width:180px;
+  float:left;
+  border-radius:50px;
+  padding:20px;
+  margin:5px;
+}
+.DashboardDiv2 {
+  background:orange;
+  height:120px;
+  width:180px;
+  float:left;
+  border-radius:50px;
+  padding:20px;
+  margin:5px;
+}
+.DashboardDivHeadingName {
+ font-size: 15px;
+ text-decoration: underline;
+}
+.SettleDashboardDiv1 {
+  background:#7FFF00;
+  height:260px;
+  width:200px;
+  float:left;
+  border-radius:50px;
+  padding:20px;
+  margin:5px;
+}
+.SettleDashboardDiv2 {
+  background:#F0E68C;
+  height:260px;
+  width:200px;
+  float:left;
+  border-radius:50px;
+  padding:20px;
+  margin:5px;
+}
+.SettleDashboardDivHeadingName {
+ font-size: 20px;
+ text-decoration: underline;
+}
+.smallSettleDashboardDivHeadingName {
+ font-size: 10px;
+ text-decoration: underline;
+}
+.bool-SettlementDivBtn {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:#F0E68C;
+    float:right;
+}
+.bool-SettlementPaidCancelBtn {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:#F0E68C;
+    float:right;
+}
+
+/*MSG BOX*/
+msgBoxDIV {
+   position:fixed;padding:0;margin:0;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.90);display:none;
+
+}
+
+avtarimage {
+  position:relative;
+  top: 0%;
+  left: 0%;
+}
+/*EXTjs MSGBOX Font*/
+MessageBoxFnt {FONT-FAMILY: courier; COLOR: #FF0000; font-size: 16px; font-weight: bold;}
+/*Settlement-Info Radio Button*/
+.x-wes {
+	font-size: 9px;
+}
+
+
+/*CHECKBOX New*/
+	.checkBox .x-form-checkbox {
+    	width: 35px;
+    	height: 35px;
+    	background-image: url(http://png-2.findicons.com/files/icons/2232/wireframe_mono/48/checkbox_unchecked.png );
+    	background-position: 0px 0px;
+    }
+    .checkBox.x-form-cb-checked .x-form-checkbox {
+    	background-image:url(http://png-4.findicons.com/files/icons/2232/wireframe_mono/48/checkbox_checked.png);
+    }

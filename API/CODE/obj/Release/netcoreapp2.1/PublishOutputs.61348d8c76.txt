@@ -1,0 +1,14 @@
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\appsettings.Development.json
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\appsettings.json
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\assets\louMultiselect\bower.json
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\assets\louMultiselect\multi-select.jquery.json
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\assets\louMultiselect\package.json
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\WebApiTest.dll
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\WebApiTest.deps.json
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\WebApiTest.runtimeconfig.json
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\WebApiTest.pdb
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\Google.Protobuf.dll
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\MySql.Data.dll
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\System.Configuration.ConfigurationManager.dll
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
+N:\DEV-CODES\ROOM-WISE\roomwise\API\CODE\obj\Release\netcoreapp2.1\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll

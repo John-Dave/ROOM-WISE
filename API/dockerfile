@@ -1,0 +1,20 @@
+
+#Build runtime image
+#FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine #AS app
+#FROM microsoft/dotnet:2.1-runtime-deps-alpine3.7 AS app
+#FROM microsoft/dotnet:2.1-aspnetcore-runtime AS app
+#FROM microsoft/dotnet:aspnetcore-runtime
+#FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine
+FROM mcr.microsoft.com/dotnet/aspnet:2.1-alpine
+WORKDIR /app/profilepics
+WORKDIR /app
+#COPY API/out /app/
+COPY out /app/
+ENV ASPNETCORE_URLS http://0.0.0.0:5000
+EXPOSE 5000
+ENTRYPOINT ["dotnet", "WebApiTest.dll"]
+
+#FROM nginx:alpine
+#COPY build/ /usr/share/nginx/html/
+#RUN ls -la /usr/share/nginx/html/
+

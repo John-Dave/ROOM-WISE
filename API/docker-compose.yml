@@ -1,0 +1,19 @@
+version: '2'
+services:
+  webapi:
+    container_name: "rumacc-api"
+    image: swaleh1513/api.rumaccounts:v2
+    environment:
+      DB_SERVER: localhost
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_PORT: 3306
+      DB_NAME: webapidbtest
+      DB_SSL_MODE: none
+      ALLOW_ORIGIN: http://localhost
+      PROFILE_PIC_PATH: /app/profilepics/
+    volumes:
+    - ./profilepics:/app/profilepics
+    restart: always
+    ports:
+      - "5000:5000"

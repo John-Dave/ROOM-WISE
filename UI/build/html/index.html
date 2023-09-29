@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>RUM - WISE</title>
+
+    <link rel="shortcut icon" href="assets/images/roomAccountsLogo.png" type="image/png">
+
+    <link rel="icon" href="assets/images/roomAccountsLogo.png" type="image/png">
+
+    <meta charset="utf-8" />
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="description" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+    <script src="assets/jsFolder/LoginSignup.js"></script>
+
+    <!--<script src="assets/jsFolder/Funtns.js"></script>-->
+
+    <script src="assets/jsFolder/settings.js"></script>
+
+	<script src="assets/jsFolder/homeContro.js"></script>
+
+	<script src="assets/jsFolder/currentUser.js"></script>
+
+	<script src="assets/jsFolder/ext-all.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+	<link href = "https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-crisp/resources/theme-crisp-all.css" 
+
+         rel = "stylesheet" />
+
+     <script type="text/javascript">Ext.Loader.setConfig({enabled: true, disableCaching: false });</script>
+
+	
+
+    <!--CDN for EXTJS
+
+
+
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/ext-all.js"></script>-->
+
+	
+
+	       <!--<link href = "https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all.css" 
+
+         rel = "stylesheet" />-->
+
+
+
+      <!--<script type = "text/javascript" 
+
+         src = "https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/ext-all.js"></script>-->
+
+      <script type = "text/javascript" 
+
+         src = "https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/packages/charts/classic/charts.js"></script>
+
+      <link href = "https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/packages/charts/classic/classic/resources/charts-all.css" 
+
+         rel = "stylesheet" />
+
+
+
+	
+
+    <script>
+
+
+
+        Ext.onReady(function () {
+
+
+
+            SetUserNameFromCookies();
+
+            Ext.create({
+
+                xtype: 'viewport',
+
+                layout: 'border',
+
+                id: 'Homeviewport',
+
+                header:false,
+
+                items: [{
+
+                    //title: '	R O O M  	-	  A C C O U N T S ',
+
+                    plugins: 'responsive',
+
+                    responsiveConfig: {
+
+                        'width < 800': {
+
+                            region: 'north'
+
+                        },
+
+
+
+                        'width >= 800': {
+
+                            region: 'west'
+
+                        }
+
+                    }
+
+                },
+
+				{
+
+				    xtype: 'panel',
+
+				    //title: '		H O M E ',
+
+				    id: 'Homepanel',
+
+				    flex: 1,
+
+				    //layout: {
+
+				    //		type: 'hbox',
+
+				    //		align: 'bottom',
+
+				    //		pack: 'center'
+
+				    //	},
+
+				    layout: 'fit',
+
+				    listeners: {
+
+				        beforerender: function (comp, eOpts) {
+
+				            //LoadAllData();
+
+				        },
+
+				        afterrender: function (comp, eOpts) {
+
+				            Ext.getCmp('splitbtn').setText(USERR.userName);
+
+
+
+				        }
+
+				    },
+
+				    region: 'center',
+
+				    header: {
+
+
+
+				        items: [{
+
+				            xtype: 'container',
+
+				            style: '{background:#08CB43;}',
+
+				            //layout:'fit',
+
+				            width: '100%',
+
+				            height: 25,
+
+				            layout: {
+
+				                type: 'hbox',
+
+				                align: 'stretch',
+
+				                pack: 'end'
+
+				            },
+
+				            id: 'headerContenr',
+
+				            items: [{
+
+				                xtype: 'container',
+
+				                margin: '0 30 0 0',
+
+				                layout: {
+
+				                    type: 'hbox',
+
+				                    align: 'stretch',
+
+				                    pack: 'start',
+
+				                },
+
+				                items: [{
+
+				                    xtype: 'image',
+
+				                    maxWidth: 35,
+
+				                    width: 35,
+
+				                    height: 35,
+
+				                    id: 'logo_Img',
+
+				                    src: 'assets/images/home.png',
+
+				                    autoEl: {
+
+				                        tag: 'a'
+
+				                    },
+
+				                    listeners: {
+
+				                        render: function (comp, eOpts) {
+
+				                            comp.mon(comp.el, 'click', function () {
+
+                                                //LoadAllData();
+
+                                                location.reload();
+
+				                            }, this);
+
+				                            comp.mon(comp.el, 'dblclick', function () {
+
+								hardReload();
+
+				                            }, this);
+
+				                        }
+
+				                    }
+
+				                }]
+
+				            }, {
+
+				                xtype: 'container',
+
+				                style: '{background:#08CB43;}',
+
+				                margin: '0 30 0 0',
+
+				                //width:'100%',
+
+				                layout: {
+
+				                    type: 'hbox',
+
+				                    align: 'stretch',
+
+				                    pack: 'start'
+
+				                },
+
+				                id: 'headerChild1Contenr',
+
+				                items: [{
+
+				                    xtype: 'image',
+
+				                    maxWidth: 25,
+
+				                    width: 25,
+
+				                    //height: 30,
+
+				                    id: 'onOff_Img',
+
+				                    src: 'assets/images/off.png'
+
+				                }]
+
+				            }, {
+
+				                xtype: 'container',
+
+				                style: '{background:#08CB43;}',
+
+				                margin: '0 30 0 0',
+
+				                //width:'100%',
+
+				                layout: {
+
+				                    type: 'hbox',
+
+				                    align: 'stretch',
+
+				                    pack: 'start'
+
+				                },
+
+				                id: 'headerNotiFicationContenr',
+
+				                items: [{
+
+				                    xtype: 'image',
+
+				                    maxWidth: 25,
+
+				                    width: 25,
+
+				                    //height: 30,
+
+				                    id: 'notiON_Img',
+
+				                    src: 'assets/images/notiON.png'
+
+				                }]
+
+				            },
+
+                                    {
+
+                                        xtype: 'splitbutton',
+
+                                        id: 'splitbtn',
+
+                                        icon: 'assets/images/localuser.png',
+
+                                        menu: new Ext.menu.Menu({
+
+                                            items: [
+
+                                                {
+
+                                                    xtype: 'container',
+
+                                                    style: '{background:#08CB43;}',
+
+                                                    layout: {
+
+                                                        type: 'hbox',
+
+                                                        align: 'stretch',
+
+                                                        pack: 'start',
+
+                                                    },
+
+                                                    items: [{
+
+                                                        xtype: 'image',
+
+                                                        maxWidth: 35,
+
+                                                        width: 35,
+
+                                                        height: 35,
+
+                                                        margin: '5 5 5 5',
+
+                                                        id: 'group_Img',
+
+                                                        src: 'assets/images/groupSmall.png',
+
+                                                        autoEl: {
+
+                                                            tag: 'a'
+
+                                                        },
+
+                                                        listeners: {
+
+                                                            render: function (comp, eOpts) {
+
+                                                                comp.mon(comp.el, 'click', function () {
+
+
+
+                                                                }, this);
+
+                                                            }
+
+                                                        }
+
+                                                    }, {
+
+                                                        xtype: 'label',
+
+                                                        forId: 'groupName',
+
+                                                        style: '{color:white;font-size:12px;}',
+
+                                                        text: USERR.groupName,
+
+                                                        margin: '7 7 7 7'
+
+                                                    }]
+
+                                                },
+
+                                                {
+
+                                                    text: ' L O G O F F ', icon: 'assets/images/logout.png', handler: function (comp, eOpts) {
+
+                                                        LogoutUser();
+
+                                                    }
+
+                                                }
+
+                                            ]
+
+                                        })
+
+
+
+                                    }]
+
+				        }]
+
+				    },
+
+				    items: [
+
+							{
+
+							    xtype: 'tabpanel',
+
+							    fullscreen: true,
+
+							    id: 'HOMEtabpanel',
+
+							    tabBarPosition: 'bottom',
+
+							    tabPosition: 'bottom',
+
+							    layout: {
+
+							        type: 'vbox'
+
+							    },
+
+							    activeTab: 0,
+
+							    tabBar: {
+
+							        height: 60,
+
+							        scrollable: 'horizontal',
+
+							        defaults: { height: 55 }
+
+							    },
+
+							    listeners: {
+
+							        beforeshow: function (comp, eOpts) {
+
+
+
+							        },
+
+							        afterrender: function (comp, eOpts) {
+
+
+
+
+
+							        }
+
+							    },
+
+							    //height:500,
+
+							    //bufferedRenderer: false,
+
+							    plain: true,
+
+							    region: 'center',
+
+							    items: [
+
+                                        {
+
+                                            title: 'Dashboard',
+
+                                            iconCls: 'dashboard',
+
+                                            id: 'dashboardtab',
+
+                                            icon: 'assets/images/dashboard.png',
+
+                                            //html: 'Dashboard Screen',
+
+                                            items: [{
+
+                                                xtype: 'container',
+
+                                                flex: 1,
+
+                                                layout: {
+
+                                                    type: 'vbox',
+
+                                                    align: 'stretch'
+
+                                                },
+
+                                                margin: '10 10 10 10',
+
+                                                id: 'dashboardContenr2',
+
+                                                autoScroll: true,
+
+                                                overflowY: 'scroll',
+
+                                                //region: 'center'
+
+                                                //style: '{overflow-x: auto;overflow-y: auto;}',
+
+                                                items: [{
+
+                                                    xtype: 'container',
+
+                                                    flex: 0.7,
+
+                                                    layout: {
+
+                                                        type: 'hbox',
+
+                                                        align: 'stretch'
+
+                                                    },
+
+                                                    id: 'dashboardContenr'
+
+                                                }, {
+
+                                                    xtype: 'container',
+
+                                                    flex: 0.3,
+
+                                                    layout: {
+
+                                                        type: 'hbox',
+
+                                                        align: 'stretch',
+
+                                                        pack: 'center'
+
+                                                    },
+
+                                                    margin: '2 2 2 2',
+
+                                                    id: 'dashboardContenr1',
+
+                                                    items: [Ext.create('Ext.Button', {
+
+                                                        text: 'Show - Tickets',
+
+                                                        icon: 'assets/images/flip.png',
+
+                                                        disabled: true,
+
+                                                        id: 'moreDetailsbtn',
+
+                                                        handler: function (comp, eOpts) {
+
+                                                            console.log(comp.getText());
+
+                                                            if (Ext.getStore('dashboardDataStore').data.items.length > 0 && comp.getText() === "Show - Tickets") {
+
+                                                                DticketsDetail();
+
+                                                                LoadDashboardFun(Ext.getStore('dashboardDataStore').data.items);
+
+                                                                comp.setText('Show - Chart');
+
+                                                            }
+
+                                                            else if (Ext.getStore('dashboardDataStore').data.items.length > 0 && comp.getText() === "Show - Chart") {
+
+                                                                DashBoardChartts();
+
+                                                                comp.setText('Show - Tickets');
+
+                                                            }
+
+                                                        }
+
+                                                    })]
+
+                                                }]
+
+                                            }],
+
+                                            listeners: {
+
+                                                beforeshow: function (comp, eOpts) {
+
+                                                    DashBoardChartts();
+
+                                                }, show: function (comp, eOpts) {
+
+
+
+                                                },
+
+                                                afterrender: function (comp, eOpts) {
+
+                                                    PageMask(true);
+
+                                                    DashBoardTaskManager(true);
+
+                                                }
+
+                                            }
+
+                                        },
+
+                                        {
+
+                                            title: 'Settle Up',
+
+                                            icon: 'assets/images/smashing.png',
+
+                                            id: 'settlementtab',
+
+                                            listeners: {
+
+                                                beforeshow: function (comp, eOpts) {
+
+                                                    PageMask(true);
+
+                                                    Ext.getStore('settlementTicketsStore').loadRawData(ResponseData_.settlementTickets);
+
+                                                    PageMask(false);
+
+                                                }, show: function (comp, eOpts) {
+
+
+
+                                                },
+
+                                                afterrender: function (comp, eOpts) {
+
+
+
+                                                }
+
+                                            },
+
+                                            //html: 'settlement Screen'
+
+                                            items: [{
+
+                                                xtype: 'container',
+
+                                                flex: 1,
+
+                                                layout: {
+
+                                                    type: 'vbox',
+
+                                                    align: 'stretch'
+
+                                                },
+
+                                                margin: '10 10 10 10',
+
+                                                id: 'settlementContenr2',
+
+                                                //autoScroll: true,
+
+                                                //overflowY: 'scroll',
+
+                                                //style: '{overflow-x: scroll;overflow-y: scroll;}',
+
+                                                items: [{
+
+                                                    xtype: 'container',
+
+                                                    flex: 1,
+
+                                                    layout: {
+
+                                                        type: 'hbox',
+
+                                                        align: 'middle',
+
+                                                        pack: 'center'
+
+                                                    },
+
+                                                    //autoScroll: true,
+
+                                                    //overflowX: 'scroll',
+
+                                                    overflowY: 'scroll',
+
+                                                    maxHeight: 400,
+
+                                                    id: 'settlementContenr'
+
+                                                }
+
+                                                        //,{
+
+                                                        //xtype: 'container',
+
+                                                        //flex: 0.3,
+
+                                                        //layout: {
+
+                                                        //		type: 'hbox',
+
+                                                        //		align: 'stretch',
+
+                                                        //		pack:'center'
+
+                                                        //	},
+
+                                                        //margin:'2 2 2 2',
+
+                                                        //id:'settlementContenr1',
+
+                                                        //}
+
+                                                ]
+
+                                            }]
+
+                                        },
+
+                                        {
+
+                                            title: 'Add-Item',
+
+                                            icon: 'assets/images/Add_Ons.png',
+
+                                            //html: 'Add-Item Screen'
+
+                                            listeners: {
+
+                                                beforeshow: function (comp, eOpts) {
+
+                                                    PageMask(true);
+
+                                                    AddItemRender();
+
+                                                    PageMask(false);
+
+                                                }, show: function (comp, eOpts) {
+
+
+
+                                                },
+
+                                                afterrender: function (comp, eOpts) {
+
+
+
+                                                }
+
+                                            },
+
+                                            items: [{
+
+                                                xtype: 'container',
+
+                                                flex: 1,
+
+                                                layout: {
+
+                                                    type: 'hbox',
+
+                                                    align: 'middle',
+
+                                                    pack: 'center'
+
+                                                },
+
+                                                margin: '10 10 10 10',
+
+                                                id: 'AdditemContenr'
+
+                                                //autoScroll: true,
+
+                                                //overflowX: 'scroll',
+
+                                                //overflowY: 'scroll',
+
+                                                //maxHeight:350,
+
+                                                //style: '{overflow-x: scroll;overflow-y: scroll;}'
+
+                                            }]
+
+                                        },
+
+                                        {
+
+                                            title: 'Entries',
+
+                                            icon: 'assets/images/library.png',
+
+                                            id: 'AllEntriestab',
+
+                                            //html: 'All-Entries Screen',
+
+                                            listeners: {
+
+                                                beforeshow: function (comp, eOpts) {
+
+                                                    PageMask(true);
+
+                                                    ShowAllEntries();
+
+                                                    PageMask(false);
+
+                                                }
+
+                                            }
+
+                                        },
+
+                                        {
+
+                                            title: 'Logs',
+
+                                            icon: 'assets/images/logs.png',
+
+                                            id: 'NoticeBoardtab',
+
+                                            //html: 'Notice Board Screen',
+
+                                            listeners: {
+
+                                                beforeshow: function (comp, eOpts) {
+
+                                                    PageMask(true);
+
+                                                    NoticeBoard();
+
+                                                    PageMask(false);
+
+                                                }
+
+                                            }
+
+                                        },
+
+                                        {
+
+                                            title: 'Accounts',
+
+                                            icon: 'assets/images/charts.png',
+
+                                            id: 'AllAccountstab',
+
+                                            //html: 'All-Accounts Screen',
+
+                                            listeners: {
+
+                                                beforeshow: function (comp, eOpts) {
+
+                                                    PageMask(true);
+
+                                                    AllAccountsChartts();
+
+                                                    PageMask(false);
+
+                                                }
+
+                                            }
+
+                                        },
+
+                                        {
+
+                                            title: 'Manage Account',
+
+                                            icon: 'assets/images/users_white.png',
+
+                                            //hidden: ActiveInactveFlag,
+
+                                            id: 'ActInactivePartnertab',
+
+                                            listeners: {
+
+                                                beforeshow: function (comp, eOpts) {
+
+                                                    ActiveInactivePartner();
+
+                                                },
+
+                                                render: function (comp, eOpts) {
+
+
+
+                                                }
+
+                                            }
+
+                                        }
+
+							    ]//tabpanel
+
+							}]//panel
+
+				}, {
+
+				    xtype: 'container',
+
+				    region: 'south',
+
+				    id: 'StatusDiv',
+
+				    height: 35,
+
+				    style: '{background-image:url(/images/test1.gif);background:#808080;border: none;border-radius: 5px 5px 5px 5px;font-size:12px;color:white;text-decoration: underline;text-align:center;}',
+
+				    html: "",
+
+				}
+
+                ]//Viewport
+
+            });
+
+            // pageShow();  Ext.getCmp('StatusDiv').getEl().update('<div id="status"  style="height:35px; color:#fff;background-image:url(./images/test1.gif)" align="center"><div style="padding-top: 8px; align:center;">' + 'aaafgjh' + '</div></div>');
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+
+
+</body>
+
+</html>
+
+
+

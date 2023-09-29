@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>LOGIN</title>
+    <link rel="shortcut icon" href="assets/images/roomAccountsLogo.png" type="image/png">
+    <link rel="icon" href="assets/images/roomAccountsLogo.png" type="image/png">
+    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="assets/jsFolder/ext-all.js"></script>
+    <script src="assets/jsFolder/LoginSignup.js"></script>
+    <script src="assets/jsFolder/Funtns.js"></script>
+    <script src="assets/jsFolder/settings.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <!--CDN for EXTJS-->
+    
+    <script type="text/javascript">Ext.Loader.setConfig({enabled: true, disableCaching: false });</script>
+      <link href = "https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-crisp/resources/theme-crisp-all.css" 
+         rel = "stylesheet" />
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all.css" rel="stylesheet" />-->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/ext-all.js"></script>-->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all-debug.js"></script>
+https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side-->
+    <script>
+
+        Ext.onReady(function () {
+            Ext.create({
+                xtype: 'viewport',
+                layout: 'border',
+                id: 'loginSignUpviewport',
+                header: false,
+                items: [{
+                    // title: 'ROOM ACCOUNTS',
+                    plugins: 'responsive',
+
+                    responsiveConfig: {
+                        'width < 800': {
+                            region: 'north'
+                        },
+
+                        'width >= 800': {
+                            region: 'west'
+                        }
+                    }
+                },
+                {
+                    xtype: 'panel',
+                    title: '		LOGIN - PAGE ',
+                    id: 'loginSignUPpanel',
+                    flex: 1,
+                    //layout: {
+                    //    type: 'hbox',
+                    //    align: 'center',
+                    //    pack: 'center'
+                    //},
+                    layout: 'fit',
+                    region: 'center',
+                    header: {
+                        // if you want your button positioned on the right hand side add
+                        // titlePosition: 0,
+                        items: [{
+                            xtype: 'splitbutton',
+                            text: ' L O G I N  /  S i g n - U p',
+                            id: 'splitbtn',
+                            menu: new Ext.menu.Menu({
+                                items: [
+									// these will render as dropdown menu items when the arrow is clicked:
+									{
+									    text: ' L O G I N ', icon: 'assets/images/logiin.png', handler: function (comp, eOpts) {
+									        addLoginSignup('render');
+									    }
+									},
+									{
+									    text: ' S i g n - U p ', icon: 'assets/images/signup.png', handler: function (comp, eOpts) {
+									        addLoginSignup(' Sign - Up ');
+									    }
+									}
+                                ]
+                            })
+                        }]
+                    },
+                    items: [{
+                        xtype: 'container',
+                        flex: 1,
+                        id: 'ParentLOGOContainer',
+                        margin: '5 5 5 5',
+                        layout: {
+                            type: 'vbox',
+                            align: 'center',
+                            pack: 'center'
+                        },
+                        items: [{
+                            xtype: 'container',
+                            flex: 0.2,
+                            id: 'LOGOContainer',
+                            margin: '5 5 5 5',
+                            layout: {
+                                type: 'hbox',
+                                align: 'center',
+                                pack: 'center'
+                            },
+                            items: [{
+                                xtype: 'image',
+                                maxWidth: 70,
+                                width: 70,
+                                height: 70,
+                                margin: '5 5 5 5',
+                                id: 'LoginLOGO',
+                                src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHIAAAByCAMAAAC4A3VPAAAAYFBMVEUAAABcxKdmZmZbxKdmZmZlZWVijYFbwqRbxadhmIVmZmb///9aWlpRrpRgYGDU3tvx8/LGzMpcxadWuZ3l6OdmsZxOpYylzcKEhISdnZ1zc3OQwrS0tLR7uahCi3aLwLFz/UwRAAAACnRSTlMAeK/bjORF/KMY0AY7QQAAAqtJREFUeF7t22mPokAQBmAYhZa+D26v//8vt3FnmN3MNE4VWmaib1Lxk3lSDQiG6uz/lPluw5j/SfiPUhRv2zJLpso3M4Ah0+62+h7cMQ8JB+U7tAR0iCB58WV5dx4aDs0WK+JJ/oYXZxJvRhFH4te29FQkL/+K1YaOLKp5WVEkemkr9hVgpmNTedP5WDCyd65Pm1Obuf+aIERgsY6xulggUsT0i21+dySVEOr4t9p9/ISQ/UTaJFkkTlcVqSbWRJ5hpB7EFLdw0ua3Jg/ikj69srs7kUYnf4I2dyLFmDyY7NakeycPmpy0CZJn/sak/CBFT08Omoo0H6SjJ8UDyJGKrGeypycHTU4eqEg7k46I1J+kkc9A1k9BWiipyEnVzJ1Skc4IsY/VGTLyM2iypicNmkTfSRw9OWg0WSPJHkR2/5ItkhwhZDh9mrZtA47UEJKpU/P+1e4URdSzj5EcQHoW2tPFPEwijhxAZExomyiak2IeSY4aSPqgIumiiCRrCSbZpUvlsWQvOY4MWDI2CSePmC7ni0RLTkwOUhOTLoq0ZC0lR5BhBcklR5FnNFlLjSP3kaxRpJH8d5Mvcn7Cq7Fk9xjSgkm5mgxQkq8lRQMmBTk5ricZgrQPIDUlqfvHkII/BTkiSTeRx5uTL9I8A6lWkL1eQwYgOawh64k8J8kXOfwyck9KWjx5WEOe6cn9i0yOFbg1ZPdrSIkimweQAkU6PMkAJLBLttylQ3VpUCTDkfIqWWSbZdLcgdxdIdWtybcsvzFpxJX/tNuspCbLLHUwWYu6eclrF0mRZcmVVUdrrWmBpJbG2prrxdG/iqVelJxi4C8tLkmT1dIYZ1BKBeaBpNZRXG5yapN8WDXL6ciSfvCYfryafoj8waPyMTnlhgD6bQ/0mzvot7D8AZTFslLF8c8RAAAAAElFTkSuQmCC'
+                            }]
+                        }, {
+                            xtype: 'container',
+                            flex: 0.8,
+                            id: 'loginSignUpviewportContainer',
+                            margin: '2 2 2 2',
+                            //style: '{background-color:#D8D8CE;}',
+                            layout: {
+                                type: 'hbox',
+                                align: 'center',
+                                pack: 'center'
+                            },
+                            listeners: {
+                                render: function (comp, eOpts) {
+                                    addLoginSignup('render');
+                                }
+                            }
+                        }]
+                    }]//
+                }, {
+                    xtype: 'container',
+                    region: 'south',
+                    id: 'StatusDiv',
+                    height: 35,
+                    style: '{background-image:url(/images/test1.gif);background:#808080;border: none;border-radius: 5px 5px 5px 5px;font-size:12px;color:white;text-decoration: underline;text-align:center;}',
+                    html: "",
+                }]
+            });
+            // pageShow();
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
